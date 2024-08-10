@@ -2,11 +2,11 @@
 // @ts-ignore
 import { connect } from 'cloudflare:sockets';
 
+// List IP Proxy
 const listProxy = [
-  { path: '/id1', proxy: '194.58.56.169' },
-  { path: '/id2', proxy: '202.10.42.30' },
-  { path: '/sgdo1', proxy: '104.248.145.216' },
-  //tambahin sendiri
+  { path: '/id01', proxy: '194.58.56.169' },
+  { path: '/id02', proxy: '202.10.42.30' },
+  { path: '/sg01', proxy: '104.248.145.216' },
 ];
 let proxyIP;
 export default {
@@ -104,7 +104,7 @@ ${allConfigs}
 
 async function vlessOverWSHandler(request) {
   const webSocketPair = new WebSocketPair();
-  const [client, webSocket] = Object.values(webSocketPair);
+  const [client, webSocket] = Object.values(webSocketPair());
 
   webSocket.accept();
 
