@@ -5,7 +5,7 @@ import { connect } from 'cloudflare:sockets';
 const listProxy = [
     { path: '/id1', proxy: '194.58.56.169' },
     { path: '/id2', proxy: '202.10.42.30' },
-    { path: '/id3', proxy: '104.248.145.216' },
+    { path: '/sgdo1', proxy: '104.248.145.216' },
     //tambahin sendiri
 ];
 let proxyIP;
@@ -42,8 +42,8 @@ async function getAllConfigVless(hostName) {
             const response = await fetch(`https://ipwhois.app/json/${proxy}`);
             const data = await response.json();
             const pathFixed = encodeURIComponent(path);
-            const vlessTls = `vless://bexnxx\u0040${hostName}:443?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=${pathFixed}#${data.isp} (${data.country_code})`;
-            const vlessNtls = `vless://bexnxx\u0040${hostName}:80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&fp=randomized&type=ws&sni=${hostName}#${data.isp} (${data.country_code})`;
+            const vlessTls = `vless://skyla-vless-tls\u0040${hostName}:443?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=${pathFixed}#${data.isp} (${data.country_code})`;
+            const vlessNtls = `vless://skyla-vless-ntls\u0040${hostName}:80?path=${pathFixed}&security=none&encryption=none&host=${hostName}&fp=randomized&type=ws&sni=${hostName}#${data.isp} (${data.country_code})`;
             const vlessTlsFixed = vlessTls.replace(/ /g, '+');
             const vlessNtlsFixed = vlessNtls.replace(/ /g, '+');
             allConfigs += 
@@ -53,11 +53,11 @@ ISP: ${data.isp}
 =====================================
 TLS:
 ${vlessTlsFixed}
-<button class="button" onclick='copyToClipboard("${vlessTlsFixed}")'><i class="fa fa-clipboard"></i>Copy  </button>
+<button class="btn btn-success" onclick='copyToClipboard("${vlessTlsFixed}")'><i class="fa fa-clipboard"></i>Copy  </button>
 =====================================
 NTLS:
 ${vlessNtlsFixed}
-<button class="button" onclick='copyToClipboard("${vlessNtlsFixed}")'><i class="fa fa-clipboard"></i>Copy  </button>
+<button class="btn btn-success" onclick='copyToClipboard("${vlessNtlsFixed}")'><i class="fa fa-clipboard"></i>Copy  </button>
 =====================================
 `;
 }
@@ -68,7 +68,8 @@ const htmlConfigs = `
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VLESS CLOUDFLARE</title>
+    <title>SKYLA - VLESS CLOUDFLARE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -110,6 +111,7 @@ ${allConfigs}
                 });
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>`;
 
